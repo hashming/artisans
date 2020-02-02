@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class HelloController {
 
-    @GetMapping("/hello")
+    /*@GetMapping("/hello")
     public String hello(@RequestParam(name = "name")String name,Model model){
         model.addAttribute("name",name);//浏览器中的值放入model中
         return "hello";
-    }
+    }*/
 
 }
