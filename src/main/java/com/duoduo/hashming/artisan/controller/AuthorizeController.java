@@ -24,6 +24,7 @@ public class AuthorizeController {
         accessTokenDTO.setRedirect_uri("http://localhost:8080/callback");
         giteeProvider.getAccessToken(accessTokenDTO);
         return "index";
+
     }
 
 }
