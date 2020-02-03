@@ -11,18 +11,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AuthorizeController {
 
     @Autowired
-    private GithubProvider giteeProvider;
+    private GithubProvider githubProvider;
 
     @GetMapping("/callback")
     public String callback(@RequestParam(name = "code")String code,
                            @RequestParam(name = "state")String state){
-        AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
-        accessTokenDTO.setClient_id("947ed878b822a3a91774");
-        accessTokenDTO.setClient_secret("565b00320c05489a19e66577c9dd4b4778428735");
+        //录入code和state
+        AccessTokenDTO accessTokenDTO = new AccessTokenDTO();//承载类
+
+        accessTokenDTO.setClient_id("c69ece8b7824522367e0");
+        accessTokenDTO.setClient_secret("58f2c0643fd18fe045b876a0c4e245ac347f2b59");
         accessTokenDTO.setState(state);
         accessTokenDTO.setCode(code);
-        accessTokenDTO.setRedirect_uri("http://localhost:8080/callback");
-        giteeProvider.getAccessToken(accessTokenDTO);
+        accessTokenDTO.setRedirect_uri("http://localhost:8080/callback");//应用程序中用户经过授权后发送的 URL 就是登录成功后跳转的页面
+
+        githubProvider.getAccessToken(accessTokenDTO);//调用accesstoken这个方法把accesstoken承载类传入这个方法
         return "index";
 
     }

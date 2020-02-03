@@ -31,11 +31,11 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<!--<dependency>
-			<groupId>org.webjars</groupId>
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
 			<artifactId>jquery</artifactId>
-			<version>3.3.1-2</version>
-		</dependency>-->
+			<version>3.4.1</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
 		<dependency>

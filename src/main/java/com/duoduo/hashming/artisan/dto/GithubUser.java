@@ -1,5 +1,8 @@
 package com.duoduo.hashming.artisan.dto;
 
+/**
+ * 存储github用户信息
+ */
 public class GithubUser {
     private String name;
     private Long id;

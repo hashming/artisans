@@ -10,22 +10,34 @@ import java.io.IOException;
 
 @Component
 public class GithubProvider {
-
-    public String getAccessToken(AccessTokenDTO accessTokenDTO){
+    /**
+     * post请求
+     * 这个方法就是获取accesstoken
+     * @param accessTokenDTO  把承载类作为参数传入进去
+     * @return
+     */
+    public String getAccessToken(AccessTokenDTO accessTokenDTO){//这里的accessTokenDTO是一个类
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
         OkHttpClient client = new OkHttpClient();
-        RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(accessTokenDTO));
+        RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(accessTokenDTO));//这里第二个形式参数，要求是json所以我们要转化一下
         Request request = new Request.Builder().url("https://github.com/login/oauth/access_token").post(body).build();
         try (Response response = client.newCall(request).execute()) {
             String ss = response.body().string();
-            System.out.println(ss);
-            return ss;
+            String token = ss.split("&")[0].split("=")[1];
+            System.out.println(token);
+            return token;
         }catch(Exception e){
             e.printStackTrace();
         }
         return null;
     }
 
+    /**
+     * get请求
+     * 获取用户名
+     * @param accessToken  传入参数accesstoken
+     * @return
+     */
     public GithubUser getUser(String accessToken){
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
@@ -34,7 +46,7 @@ public class GithubProvider {
         try {
             Response response = client.newCall(request).execute();
             String string = response.body().string();
-            GithubUser githubUser = JSON.parseObject(string, GithubUser.class);
+            GithubUser githubUser = JSON.parseObject(string, GithubUser.class);//把string转化为java的类对象
             return githubUser;
         } catch (IOException e) {
             e.printStackTrace();
