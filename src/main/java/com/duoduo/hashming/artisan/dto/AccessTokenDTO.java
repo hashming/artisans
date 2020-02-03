@@ -2,10 +2,18 @@ package com.duoduo.hashming.artisan.dto;
 
 public class AccessTokenDTO {
     private String client_id;
-    private String clident_secret;
+    private String client_secret;
     private String code;
     private String redirect_uri;
     private String state;
+
+    public String getClient_secret() {
+        return client_secret;
+    }
+
+    public void setClient_secret(String client_secret) {
+        this.client_secret = client_secret;
+    }
 
     public String getClient_id() {
         return client_id;
@@ -15,13 +23,6 @@ public class AccessTokenDTO {
         this.client_id = client_id;
     }
 
-    public String getClident_secret() {
-        return clident_secret;
-    }
-
-    public void setClident_secret(String clident_secret) {
-        this.clident_secret = clident_secret;
-    }
 
     public String getCode() {
         return code;
