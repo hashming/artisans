@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class AuthorizeController {
 
@@ -27,7 +29,8 @@ public class AuthorizeController {
 
     @GetMapping("/callback")
     public String callback(@RequestParam(name = "code")String code,
-                           @RequestParam(name = "state")String state){
+                           @RequestParam(name = "state")String state,
+                           HttpServletRequest request){//会把上下文中的request直接放在这个request参数中
         //录入code和state
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();//承载类
 
@@ -39,8 +42,17 @@ public class AuthorizeController {
 
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);//调用accesstoken这个方法把accesstoken承载类传入这个方法
         GithubUser user = githubProvider.getUser(accessToken);
-        System.out.println(user.getName());
-        return "index";
+
+        if(user!=null){
+            request.getSession().setAttribute("user",user);
+//            return "redirect:index";
+            return "redirect:/";//redirect后面要引入一个具体的路径。
+            //登录成功写cookie和session
+        }else{
+            return "redirect:/";
+            //登录失败，重新登录
+        }
+//        return "index";
 
     }
 
