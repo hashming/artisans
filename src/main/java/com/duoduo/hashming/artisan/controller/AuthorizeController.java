@@ -2,7 +2,10 @@ package com.duoduo.hashming.artisan.controller;
 
 import com.duoduo.hashming.artisan.dto.AccessTokenDTO;
 import com.duoduo.hashming.artisan.dto.GithubUser;
+import com.duoduo.hashming.artisan.dao.UserMapper;
+import com.duoduo.hashming.artisan.model.User;
 import com.duoduo.hashming.artisan.provider.GithubProvider;
+import com.duoduo.hashming.artisan.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.UUID;
 
 @Controller
 public class AuthorizeController {
@@ -25,6 +29,9 @@ public class AuthorizeController {
     private String secret;
     @Value("${github.redirect.uri}")
     private String uri;
+
+    @Autowired
+    private UserService userService;
 
 
     @GetMapping("/callback")
@@ -44,6 +51,13 @@ public class AuthorizeController {
         GithubUser user = githubProvider.getUser(accessToken);
 
         if(user!=null){
+            User user1 = new User();
+            user1.setToken(UUID.randomUUID().toString());
+            user1.setName(user.getName());
+            user1.setAccount_id(String.valueOf(user.getId()));
+            user1.setGmt_create(System.currentTimeMillis());
+            user1.setGmt_modified(user1.getGmt_create());
+            userService.addUser(user1);
             request.getSession().setAttribute("user",user);
 //            return "redirect:index";
             return "redirect:/";//redirect后面要引入一个具体的路径。

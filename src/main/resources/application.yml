@@ -1,0 +1,26 @@
+spring:
+    datasource:
+        name: test
+        url: jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+        username: root
+        password: root
+        driver-class-name: com.mysql.jdbc.Driver
+
+github:
+  redirect:
+    uri: http://localhost:8080/callback
+  client:
+    id: c69ece8b7824522367e0
+    secret: 58f2c0643fd18fe045b876a0c4e245ac347f2b59
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.duoduo.hashming.artisan.model
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+  returnPageInfo: check
