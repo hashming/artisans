@@ -52,7 +52,8 @@ public class AuthorizeController {
 
         if(user!=null){
             User user1 = new User();
-            user1.setToken(UUID.randomUUID().toString());
+            String token = UUID.randomUUID().toString();
+            user1.setToken(token);
             user1.setName(user.getName());
             user1.setAccount_id(String.valueOf(user.getId()));
             user1.setGmt_create(System.currentTimeMillis());

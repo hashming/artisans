@@ -5,7 +5,7 @@ import com.duoduo.hashming.artisan.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service(value = "userService")
+@Service(value = "userService")//定位到对应的接口
 public class UserServiceImpl implements UserService{
 
     @Autowired
