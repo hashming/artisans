@@ -11,8 +11,23 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserMapper userMapper;
 
+    /**
+     * 动态的存入用户登录的信息
+     * @param user
+     * @return
+     */
     @Override
     public int addUser(User user) {
         return userMapper.insert(user);
+    }
+
+    /**
+     * 通过token取出对应的user信息
+     * @param token
+     * @return
+     */
+    @Override
+    public User find(String token) {
+        return userMapper.findByToken(token);
     }
 }

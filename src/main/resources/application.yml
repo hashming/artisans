@@ -1,17 +1,30 @@
 spring:
     datasource:
         name: test
-        url: jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+        url: jdbc:mysql://127.0.0.1:3306/hh_demo?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
         username: root
         password: root
         driver-class-name: com.mysql.jdbc.Driver
 
+
+# 数据库版本控制
+flyway:
+   enabled: true
+  # 若连接的数据库非空库，是否初始化
+   baseline-on-migrate: true
+  # 是否开启校验
+   validate-on-migrate: false
+  # 默认脚本加载路径：/db/migration
+   clean-disabled: true
+  # 如果数据库不是空表，需要设置成 true，否则启动报错
+# locations=classpath:/db/migration
+
 github:
-  redirect:
-    uri: http://localhost:8080/callback
-  client:
-    id: c69ece8b7824522367e0
-    secret: 58f2c0643fd18fe045b876a0c4e245ac347f2b59
+   redirect:
+     uri: http://localhost:8080/callback
+   client:
+     id: c69ece8b7824522367e0
+     secret: 58f2c0643fd18fe045b876a0c4e245ac347f2b59
 
 
 mybatis:

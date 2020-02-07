@@ -22,12 +22,14 @@
         </trim>
     </insert>
 
-   <!-- <select id="selectUsers" resultType="com.duoduo.springbootjdbc.springboot_jdbc.pojo.User">
-        SELECT
-        <include refid="BASE_COLUMN"/>
-        FROM
+   <select id="findByToken" resultType="com.duoduo.hashming.artisan.model.User">
+        SELECT * FROM
         <include refid="BASE_TABLE"/>
-    </select>-->
+       WHERE 1 = 1
+       <if test="token!=null">
+           and token = #{token}
+       </if>
+    </select>
 
 
 </mapper>

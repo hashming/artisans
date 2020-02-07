@@ -2,6 +2,7 @@ package com.duoduo.hashming.artisan.dto;
 
 /**
  * 存储github用户信息
+ * 返回的信息有很多，这里我们只需要name,id,bio
  */
 public class GithubUser {
     private String name;
@@ -31,4 +32,16 @@ public class GithubUser {
     public void setBio(String bio) {
         this.bio = bio;
     }
+
+    @Override
+    public String toString() {
+        return "GithubUser{" +
+                "name='" + name + '\'' +
+                ", id=" + id +
+                ", bio='" + bio + '\'' +
+                '}';
+    }
+
+
+
 }

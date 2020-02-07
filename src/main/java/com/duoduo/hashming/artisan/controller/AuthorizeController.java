@@ -12,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 @Controller
@@ -37,7 +39,7 @@ public class AuthorizeController {
     @GetMapping("/callback")
     public String callback(@RequestParam(name = "code")String code,
                            @RequestParam(name = "state")String state,
-                           HttpServletRequest request){//会把上下文中的request直接放在这个request参数中
+                           HttpServletRequest request, HttpServletResponse response){//会把上下文中的request直接放在这个request参数中
         //录入code和state
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();//承载类
 
@@ -47,21 +49,27 @@ public class AuthorizeController {
         accessTokenDTO.setCode(code);
         accessTokenDTO.setRedirect_uri(uri);//应用程序中用户经过授权后发送的 URL 就是登录成功后跳转的页面
 
-        String accessToken = githubProvider.getAccessToken(accessTokenDTO);//调用accesstoken这个方法把accesstoken承载类传入这个方法
-        GithubUser user = githubProvider.getUser(accessToken);
+        //第一步骤已经完成
+        String accessToken = githubProvider.getAccessToken(accessTokenDTO);//调用accesstoken这个方法把accesstoken承载类传入这个方法  accesstoken访问令牌
+        //第二步骤完成，成功获取到accesstoken
+        GithubUser user = githubProvider.getUser(accessToken);//获取github的用户信息
 
-        if(user!=null){
+        if(user!=null){//如果登录成功就生成一个token,存储入数据库中
             User user1 = new User();
-            String token = UUID.randomUUID().toString();
+            String token = UUID.randomUUID().toString();//生成一个token
+            //存入数据库
             user1.setToken(token);
             user1.setName(user.getName());
             user1.setAccount_id(String.valueOf(user.getId()));
             user1.setGmt_create(System.currentTimeMillis());
             user1.setGmt_modified(user1.getGmt_create());
             userService.addUser(user1);
-            request.getSession().setAttribute("user",user);
+
+            response.addCookie(new Cookie("token",token));//把token放入到cookie中
+
+//            request.getSession().setAttribute("user",user);
 //            return "redirect:index";
-            return "redirect:/";//redirect后面要引入一个具体的路径。
+            return "redirect:/";//redirect后面要引入一个具体的路径。重定向
             //登录成功写cookie和session
         }else{
             return "redirect:/";
