@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.duoduo.hashming.artisan.dao.QuestionMapper" >
+
+    <sql id="BASE_TABLE">
+        question
+    </sql>
+
+    <sql id="BASE_COLUMN">
+        id,title,description,gmt_create,gmt_modified,creator,comment_count,view_count,like_count,tag
+    </sql>
+
+    <insert id="create" parameterType="com.duoduo.hashming.artisan.model.Question">
+        INSERT INTO
+        <include refid="BASE_TABLE"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            title,description,gmt_create,gmt_modified,creator,comment_count,view_count,like_count,tag,
+        </trim>
+        <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+            #{title, jdbcType=VARCHAR},#{description, jdbcType=TEXT},#{gmt_create, jdbcType=BIGINT},#{gmt_modified, jdbcType=BIGINT},#{creator, jdbcType=INT},#{comment_count, jdbcType=INT},#{view_count, jdbcType=INT},#{like_count, jdbcType=INT},#{tag, jdbcType=VARCHAR},
+        </trim>
+    </insert>
+
+    <select id="findByToken" resultType="com.duoduo.hashming.artisan.model.User">
+        SELECT * FROM
+        <include refid="BASE_TABLE"/>
+        WHERE 1 = 1
+        <if test="token!=null">
+            and token = #{token}
+        </if>
+    </select>
+
+
+</mapper>
