@@ -14,6 +14,8 @@ bootstrap:https://v3.bootcss.com/components/#navbar-buttons
 
 git工具
 
+
+flyway工具（数据库版本管理软件）
 ## 建库语句
 ~~~ sql
 CREATE TABLE USER
@@ -26,5 +28,3 @@ CREATE TABLE USER
     GMT_MODIFIED BIGINT
 );
 ~~~
-
-## 测试
