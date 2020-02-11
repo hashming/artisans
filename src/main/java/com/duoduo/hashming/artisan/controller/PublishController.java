@@ -30,15 +30,16 @@ public class PublishController {
     }
 
     @PostMapping("/publish")
-    public String doPublish(
-            @RequestParam("title") String title,//标题
-            @RequestParam("description") String description,//详情描述
-            @RequestParam("tag") String tag,//标签
+    public String doPublish(//required=false或者true来要求@RequestParam配置的前端参数是否一定要传
+            @RequestParam(name = "title") String title,//标题
+            @RequestParam(name = "description") String description,//详情描述
+            @RequestParam(name = "tag") String tag,//标签
             HttpServletRequest request,Model model//request请求
     ){
-        model.addAttribute("title",title);
+        //首先把这些值放在model中就是为了能够在添加失败的时候还能回显到页面中去
+        /*model.addAttribute("title",title);
         model.addAttribute("description",description);
-        model.addAttribute("tag",tag);
+        model.addAttribute("tag",tag);*/
 
         if (title==null || title==""){
             model.addAttribute("error","标题不能是空的");
@@ -52,6 +53,11 @@ public class PublishController {
             model.addAttribute("error","标签不能是空的");
             return "publish";
         }
+
+        model.addAttribute("title",title);
+        model.addAttribute("description",description);
+        model.addAttribute("tag",tag);
+
 
         User user = null;
         Cookie[] cookies = request.getCookies();//请求中又好多cookie
