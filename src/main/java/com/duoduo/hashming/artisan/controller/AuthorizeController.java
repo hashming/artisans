@@ -63,6 +63,7 @@ public class AuthorizeController {
             user1.setAccount_id(String.valueOf(user.getId()));
             user1.setGmt_create(System.currentTimeMillis());
             user1.setGmt_modified(user1.getGmt_create());
+            user1.setAvatar_url(user.getAvatar_url());
             userService.addUser(user1);
 
             response.addCookie(new Cookie("token",token));//把token放入到cookie中

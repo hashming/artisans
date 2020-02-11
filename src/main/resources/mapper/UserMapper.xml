@@ -8,17 +8,17 @@
     </sql>
 
     <sql id="BASE_COLUMN">
-        id,account_id,name,token,gmt_create,gmt_modified
+        id,account_id,name,token,gmt_create,gmt_modified,avatar_url
     </sql>
 
     <insert id="insert" parameterType="com.duoduo.hashming.artisan.model.User">
         INSERT INTO
         <include refid="BASE_TABLE"/>
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            account_id,name,token,gmt_create,gmt_modified,
+            account_id,name,token,gmt_create,gmt_modified,avatar_url,
         </trim>
         <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
-            #{account_id, jdbcType=VARCHAR},#{name, jdbcType=VARCHAR},#{token, jdbcType=VARCHAR},#{gmt_create, jdbcType=BIGINT},#{gmt_modified, jdbcType=BIGINT},
+            #{account_id, jdbcType=VARCHAR},#{name, jdbcType=VARCHAR},#{token, jdbcType=VARCHAR},#{gmt_create, jdbcType=BIGINT},#{gmt_modified, jdbcType=BIGINT},#{avatar_url, jdbcType=VARCHAR},
         </trim>
     </insert>
 
