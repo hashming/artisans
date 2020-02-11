@@ -31,11 +31,28 @@ public class PublishController {
 
     @PostMapping("/publish")
     public String doPublish(
-            @RequestParam("title") String title,
-            @RequestParam("description") String description,
-            @RequestParam("tag") String tag,
-            HttpServletRequest request,Model model
+            @RequestParam("title") String title,//标题
+            @RequestParam("description") String description,//详情描述
+            @RequestParam("tag") String tag,//标签
+            HttpServletRequest request,Model model//request请求
     ){
+        model.addAttribute("title",title);
+        model.addAttribute("description",description);
+        model.addAttribute("tag",tag);
+
+        if (title==null || title==""){
+            model.addAttribute("error","标题不能是空的");
+            return "publish";
+        }
+        if (description==null || description==""){
+            model.addAttribute("error","描述不能是空的");
+            return "publish";
+        }
+        if (tag==null || tag==""){
+            model.addAttribute("error","标签不能是空的");
+            return "publish";
+        }
+
         User user = null;
         Cookie[] cookies = request.getCookies();//请求中又好多cookie
         //下面的这个代码以后可以用redis的方式进行代替
@@ -62,7 +79,10 @@ public class PublishController {
         question.setCreator(user.getId());
         question.setGmt_create(System.currentTimeMillis());
         question.setGmt_modified(question.getGmt_create());
-        questionService.addQuestion(question);
+
+        questionService.addQuestion(question);//写入数据库
+
         return "redirect:/";
+
     }
 }

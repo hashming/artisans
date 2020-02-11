@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>发布——匠心社区</title>
+    <title>发布—匠心社区</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -39,7 +39,9 @@
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-
+                <li th:if="${session.user!=null}">
+                    <a href="/publish">发布</a>
+                </li>
                 <!--如果session中有值的情况下，右上角是显示登录的用户名信息-->
                 <li class="dropdown" th:if="${session.user != null}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="${session.user.getName()}"><span class="caret"></span></a>
@@ -69,22 +71,24 @@
             <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>发起</h2>
             <hr/>
             <form action="/publish" method="post">
+                <!--上面的method方法的值是post就定义了这个请求的类型是post的时候才会被接受-->
                 <div class="form-group">
+                    <!--th:text="${title}"这个和后端的校验有联系-->
                     <label for="title">问题标题（简单的说明）</label>
-                    <input type="text" class="form-control" name="title" id="title" placeholder="问题标题...">
+                    <input type="text" class="form-control" th:text="${title}" name="title" id="title" placeholder="问题标题...">
                 </div>
                 <div class="form-group">
-                    <label for="descripte">问题补充</label>
-                    <textarea class="form-control" name="descripte" id="descripte" cols="30" rows="10"></textarea>
+                    <label for="description">问题补充</label>
+                    <textarea class="form-control" th:text="${description}" name="description" id="description" cols="30" rows="10"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="tag">添加标签：</label>
-                    <input type="text" class="form-control" name="tag" id="tag" placeholder="输入标签用，号隔开...">
+                    <input type="text" class="form-control" th:text="${tag}" name="tag" id="tag" placeholder="输入标签用，号隔开...">
                 </div>
 
                 <div class="container-fluid main">
                     <div class="row">
-                        <div class="alet alert-danger col-lg-9 col-md-12 col-sm-12 col-xs-12" th:text="${error}"></div>
+                        <div class="alet alert-danger col-lg-9 col-md-12 col-sm-12 col-xs-12" th:text="${error}" th:if="${error!=null}"></div>
                         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                             <button type="submit" class="btn btn-success btn-publish">
                                 发布

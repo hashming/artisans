@@ -18,7 +18,7 @@
             title,description,gmt_create,gmt_modified,creator,comment_count,view_count,like_count,tag,
         </trim>
         <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
-            #{title, jdbcType=VARCHAR},#{description, jdbcType=TEXT},#{gmt_create, jdbcType=BIGINT},#{gmt_modified, jdbcType=BIGINT},#{creator, jdbcType=INT},#{comment_count, jdbcType=INT},#{view_count, jdbcType=INT},#{like_count, jdbcType=INT},#{tag, jdbcType=VARCHAR},
+            #{title, jdbcType=VARCHAR},#{description, jdbcType=LONGVARCHAR},#{gmt_create, jdbcType=BIGINT},#{gmt_modified, jdbcType=BIGINT},#{creator, jdbcType=INTEGER},#{comment_count, jdbcType=INTEGER},#{view_count, jdbcType=INTEGER},#{like_count, jdbcType=INTEGER},#{tag, jdbcType=VARCHAR},
         </trim>
     </insert>
 
