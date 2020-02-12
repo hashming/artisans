@@ -89,7 +89,12 @@
                 <div class="container-fluid main">
                     <div class="row">
                         <!--error这个绑定着后端的error标签-->
-                        <div class="alet alert-danger col-lg-9 col-md-12 col-sm-12 col-xs-12" th:text="${error}" th:if="${error!=null}"></div>
+                        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                            <div class="alet alert-danger col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                                th:text="${error}"
+                                th:if="${error!=null}">
+                            </div>
+                        </div>
                         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                             <!--因为这里type的类型是submit，点击之后就会连接后端的post请求上-->
                             <button type="submit" class="btn btn-success btn-publish">
