@@ -22,13 +22,22 @@
         </trim>
     </insert>
 
-   <select id="findByToken" resultType="com.duoduo.hashming.artisan.model.User">
+   <select id="findById" resultType="com.duoduo.hashming.artisan.model.User">
         SELECT * FROM
         <include refid="BASE_TABLE"/>
        WHERE 1 = 1
-       <if test="token!=null">
-           and token = #{token}
+       <if test="id!=null">
+           and id = #{id}
        </if>
+    </select>
+
+    <select id="findByToken" resultType="com.duoduo.hashming.artisan.model.User">
+        SELECT * FROM
+        <include refid="BASE_TABLE"/>
+        WHERE 1 = 1
+        <if test="token!=null">
+            and token = #{token}
+        </if>
     </select>
 
 

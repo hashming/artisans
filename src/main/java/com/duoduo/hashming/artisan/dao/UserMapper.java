@@ -1,7 +1,6 @@
 package com.duoduo.hashming.artisan.dao;
 
 import com.duoduo.hashming.artisan.model.User;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -17,4 +16,9 @@ public interface UserMapper {
     //根据token进行查找
     User findByToken(@Param("token") String token);
 
+    /**
+     * 根据id查询用户信息
+     * @param id
+     */
+    User findById(@Param("id")Integer id);
 }

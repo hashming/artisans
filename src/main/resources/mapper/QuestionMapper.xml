@@ -22,13 +22,8 @@
         </trim>
     </insert>
 
-    <select id="findByToken" resultType="com.duoduo.hashming.artisan.model.User">
-        SELECT * FROM
-        <include refid="BASE_TABLE"/>
-        WHERE 1 = 1
-        <if test="token!=null">
-            and token = #{token}
-        </if>
+    <select id="getall" resultType="com.duoduo.hashming.artisan.model.Question">
+        select * from question
     </select>
 
 

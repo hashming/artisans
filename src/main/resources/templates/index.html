@@ -7,6 +7,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/community.css">
     <script src="js/bootstrap.min.js" type="application/javascript"></script>
 
 
@@ -25,7 +26,7 @@
                 <span class="sr-only">匠心社区</span>
 
             </button>
-            <a class="navbar-brand" href="#">匠心社区</a>
+            <a class="navbar-brand" href="/">匠心社区</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -71,6 +72,36 @@
     </div>
     <!--上面这个div定义的整个状态栏，第一个是log,第二个是搜索框和搜索按钮，第三个是右边的显示，先显示发布按钮，点击发布按钮就会跳转到publish,最右边的是一个判断，如果session中的user有信息的时候显示用户名，如果没有信息的时候显示登录文字提示-->
 </nav>
+
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span>发起</h2>
+            <hr/>
+
+            <!--这个就是一个循环列表 用的th:each-->
+            <div class="media" th:each="question:${questions}">
+                <div class="media-left">
+                    <a href="#">
+                        <img class="media-object img-rounded" th:src="${question.user.avatar_url}">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading" th:text="${question.title}"></h4>
+                    <span th:text="${question.description}"></span> <br>
+                    <span class="text-desc"><span th:text="${question.comment_count}"></span>个回复 • <span th:text="${question.view_count}"></span> 次浏览 • 1 小时前</span>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <h3>热门话题</h3>
+            - 标题不超过25个字<br/>
+            - 问题补充说人话<br/>
+            - 选择标题，选择一个或者多个标题然后用逗号进行分隔，每个标签不超过10个字。<br/>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
