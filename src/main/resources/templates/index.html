@@ -80,7 +80,8 @@
             <hr/>
 
             <!--这个就是一个循环列表 用的th:each-->
-            <div class="media" th:each="question:${questions}">
+            <!--${questions}-->
+            <div class="media" th:each="question:${pagination.questions}">
                 <div class="media-left">
                     <a href="#">
                         <img class="media-object img-rounded" th:src="${question.user.avatar_url}">
@@ -92,6 +93,29 @@
                     <span class="text-desc"><span th:text="${question.comment_count}"></span>个回复 • <span th:text="${question.view_count}"></span> 次浏览 • <span th:text="${#dates.format(question.gmt_create,'yyyy-MM-dd HH:mm')}"></span> </span>
                 </div>
             </div>
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    <!--<li th:each="page:${pagination.pages}"><a th:text="${page}"></a> </li>-->
+                    <!--href实现一个网址的拼接，比如我这里拼接成了http://localhost:8080/?pageNum=3   text实现了下面页码栏当前页面的打印
+                    里面的th:class是为了实现当前页码的高亮显示-->
+                    <li th:each="page:${pagination.pages}" th:class="${pagination.page==page}?'active':''">
+                        <a th:href="@{/(pageNum=${page})}" th:text="${page}"></a>
+                    </li>
+
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
 
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">

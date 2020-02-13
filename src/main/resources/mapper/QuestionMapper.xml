@@ -23,8 +23,13 @@
     </insert>
 
     <select id="getall" resultType="com.duoduo.hashming.artisan.model.Question">
-        select * from question
+        select * from question limit #{offset},#{pageSize}
     </select>
+
+    <select id="count" resultType="Integer">
+        select count(1) from question
+    </select>
+
 
 
 </mapper>
