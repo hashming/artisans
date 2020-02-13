@@ -30,13 +30,23 @@ public class QuestionServiceImpl implements QuestionService{
     @Override
     //这里把结果返回给我们新定义的类中，这个类包含了页数信息和要返回的数据信息。
     public PaginationDTO show(Integer pageNum, Integer pageSize) {
+        PaginationDTO paginationDTO = new PaginationDTO();
+        Integer totalCount = questionMapper.count();//获取所有的问题数量
+        paginationDTO.setPagination(totalCount,pageNum,pageSize);//
+
+        if (pageNum<1){
+            pageNum=1;
+        }
+        if (pageNum>paginationDTO.getTotalPage()){
+            pageNum=paginationDTO.getTotalPage();
+        }
+
         //查询出来所有的额问题信息，存入list中
         //size*(page-1)
         Integer offset = pageSize*(pageNum-1);
         List<Question> questions = questionMapper.getall(offset,pageSize);//根据分页信息查询问题列表
         List<QuestionDTO> questionDTOList = new ArrayList<>();
 
-        PaginationDTO paginationDTO = new PaginationDTO();
         for (Question question : questions) {
             //这里的creator和id是相互对应的
             User user = userMapper.findById(question.getCreator());
@@ -47,10 +57,8 @@ public class QuestionServiceImpl implements QuestionService{
             questionDTOList.add(questionDTO);//把所有question多一个user属性点的东西都添加在列表中
         }
         paginationDTO.setQuestions(questionDTOList);
-        Integer totalCount = questionMapper.count();//获取所有的问题数量
         //传入的参数有当前页码，页数，页面大小
-        paginationDTO.setPagination(totalCount,pageNum,pageSize);//
-        
+
         return paginationDTO;
 
     }

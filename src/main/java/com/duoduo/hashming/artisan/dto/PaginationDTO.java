@@ -11,7 +11,8 @@ public class PaginationDTO {
     private boolean showFirstPage;//显示首页按钮
     private boolean showNext;//显示下一页
     private boolean showEndPage;//显示最终页按钮
-    private Integer page;//目前的页数
+    private Integer page;//当前的页数
+    private Integer totalPage;//总共可以分几个页数  如果是totalcount是11个数据，然后这里是3
     private List<Integer> pages = new ArrayList<>();//页数标签所包含的页数
 
     /**
@@ -21,13 +22,20 @@ public class PaginationDTO {
      * @param pageSize
      */
     public void setPagination(Integer totalCount, Integer pageNum, Integer pageSize) {//默认情况下pagenum是1 pagesize是5
-        this.page = pageNum;
-        Integer totalPage;//总共可以分几个页数  如果是totalcount是11个数据，然后这里是3
+
         if (totalCount % pageSize == 0) {
             totalPage = totalCount / pageSize;
         } else {
             totalPage = totalCount / pageSize + 1;
         }
+
+        if (pageNum<1){
+            pageNum=1;
+        }
+        if (pageNum>totalPage){
+            pageNum=totalPage;
+        }
+        this.page = pageNum;
 
         pages.add(pageNum);//如果是3 1234567
         for (int i = 1; i <=3; i++) {
