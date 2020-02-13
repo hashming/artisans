@@ -16,62 +16,8 @@
 </head>
 <body>
 <!--<p th:text="'Hello, ' + ${name} + '!'" />-->
-
-<nav class="navbar navbar-default">
-
-    <div class="container-fluid">
-        <!-- 网站log -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">匠心社区</span>
-
-            </button>
-            <a class="navbar-brand" href="/">匠心社区</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <!--form表单-->
-            <form class="navbar-form navbar-left">
-                <!--文本框-->
-                <div class="form-group">
-                    <!--placeholder是搜索框中默认的显示提示-->
-                    <input type="text" class="form-control" placeholder="搜索内容">
-                </div>
-                <!--搜索按钮-->
-                <button type="submit" class="btn btn-default">搜索</button>
-            </form>
-
-            <!--ul代表的是无序列表-->
-            <ul class="nav navbar-nav navbar-right">
-                <!--这里是一个判断，这个判断不是很成熟，定义的是session中的user信息是空的时候，也可以显示发布按钮-->
-                <li th:if="${session.user!=null}">
-                    <a href="/publish">发布</a>
-                </li>
-
-                <!--如果session中有值的情况下，右上角是显示登录的用户名信息-->
-                <li class="dropdown" th:if="${session.user != null}">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="${session.user.getName()}"><span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">消息中心</a></li>
-                        <li><a href="#">个人资料</a></li>
-                        <li><a href="#">退出登录</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </li>
-
-                <!--如果session中没有值的情况下，右上角是登录字样-->
-                <li th:if="${session.user == null}">
-                    <a href="https://github.com/login/oauth/authorize?client_id=c69ece8b7824522367e0&redirect_uri=http://localhost:8080/callback&scope=user&state=1">登录</a>
-                    <!--第一步的时候添加的连接，官方文档上显示client_id是必要的，这里我们又添加了一个重定向uri-->
-                </li>
-
-            </ul>
-        </div>
-    </div>
-    <!--上面这个div定义的整个状态栏，第一个是log,第二个是搜索框和搜索按钮，第三个是右边的显示，先显示发布按钮，点击发布按钮就会跳转到publish,最右边的是一个判断，如果session中的user有信息的时候显示用户名，如果没有信息的时候显示登录文字提示-->
-</nav>
+<!--模版引入-->
+<div th:insert="~{navigation :: nav}"></div>
 
 <div class="container-fluid main">
     <div class="row">

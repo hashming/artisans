@@ -32,7 +32,7 @@ public class IndexController {
     @GetMapping("/")
     public String index(HttpServletRequest request, Model model,
                         @RequestParam(name = "pageNum",defaultValue = "1") Integer pageNum,
-                        @RequestParam(name = "pageSize",defaultValue = "2") Integer pageSize){
+                        @RequestParam(name = "pageSize",defaultValue = "5") Integer pageSize){
         //cookie和session的关系。cookie是银行卡，session是账户
         Cookie[] cookies = request.getCookies();//请求中又好多cookie
         //下面的这个代码以后可以用redis的方式进行代替
