@@ -22,3 +22,7 @@ body{
     font-weight: normal;
     color: #999;
 }
+/*profile是路径 section是作用域*/
+.profile .section{
+    margin-top:15px;
+}
