@@ -4,8 +4,11 @@ import com.duoduo.hashming.artisan.dao.QuestionMapper;
 import com.duoduo.hashming.artisan.dao.UserMapper;
 import com.duoduo.hashming.artisan.dto.PaginationDTO;
 import com.duoduo.hashming.artisan.dto.QuestionDTO;
+import com.duoduo.hashming.artisan.dto.Question_User;
 import com.duoduo.hashming.artisan.model.Question;
 import com.duoduo.hashming.artisan.model.User;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,17 +34,24 @@ public class QuestionServiceImpl implements QuestionService{
     //这里把结果返回给我们新定义的类中，这个类包含了页数信息和要返回的数据信息。
     public PaginationDTO show(Integer pageNum, Integer pageSize) {
         PaginationDTO paginationDTO = new PaginationDTO();
-        Integer totalCount = questionMapper.count();//获取所有的问题数量
-        paginationDTO.setPagination(totalCount,pageNum,pageSize);//
+        Integer totalPage;
+        Integer totalCount = questionMapper.count();
+
+        if (totalCount % pageSize == 0) {
+            totalPage = totalCount / pageSize;
+        } else {
+            totalPage = totalCount / pageSize + 1;
+        }
 
         if (pageNum<1){
             pageNum=1;
         }
-        if (pageNum>paginationDTO.getTotalPage()){
-            pageNum=paginationDTO.getTotalPage();
+        if (pageNum>totalPage){
+            pageNum=totalPage;
         }
 
         //查询出来所有的额问题信息，存入list中
+        paginationDTO.setPagination(totalCount,pageNum);
         //size*(page-1)
         Integer offset = pageSize*(pageNum-1);
         List<Question> questions = questionMapper.getall(offset,pageSize);//根据分页信息查询问题列表
@@ -73,28 +83,64 @@ public class QuestionServiceImpl implements QuestionService{
     }
 
     /**
-     * 分页插件
+     * 查询指定的用户创建的问题
+     * @param userId
      * @param pageNum
      * @param pageSize
-     * @return
      */
-    /*@Override
-    public PageInfo<Question> findAllQuestion(int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);//开始的页数，每一页的现实的数据的条数
+    public PaginationDTO show(Integer userId,Integer pageNum, Integer pageSize){
+        PaginationDTO paginationDTO = new PaginationDTO();
+        Integer totalPage;
+        Integer totalCount = questionMapper.countByUserId(userId);//获取所有的问题数量
 
-        List<Question> questions = questionMapper.getall();
+        if (totalCount % pageSize == 0) {
+            totalPage = totalCount / pageSize;
+        } else {
+            totalPage = totalCount / pageSize + 1;
+        }
+
+        if (pageNum<1){
+            pageNum=1;
+        }
+        if (pageNum>totalPage){
+            pageNum=totalPage;
+        }
+        paginationDTO.setPagination(totalCount,pageNum);
+        Integer offset = pageSize*(pageNum-1);
+        List<Question> questions = questionMapper.getall_byCreator(userId,offset,pageSize);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         for (Question question : questions) {
-            //这里的creator和id是相互对应的
             User user = userMapper.findById(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
-//            questionDTO.setUser(user);
             BeanUtils.copyProperties(question,questionDTO);
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
+        paginationDTO.setQuestions(questionDTOList);
+        return paginationDTO;
+    }
 
-        PageInfo result = new PageInfo(questionDTOList);
+    /**
+     * 分页插件 主页的查询所有问题
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public PageInfo<Question_User> findAllQuestion(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Question_User> questions = questionMapper.showAll();//这里面的数据没有和user表格相互关联
+        PageInfo<Question_User> result = new PageInfo(questions);
+
         return result;
-    }*/
+    }
+
+    @Override
+    public PageInfo<Question_User> findAllQuestionByuserId(Integer userId, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Question_User> question_users = questionMapper.showAll_byCreator(userId);
+        PageInfo<Question_User> result = new PageInfo(question_users);
+        return result;
+    }
+
 }

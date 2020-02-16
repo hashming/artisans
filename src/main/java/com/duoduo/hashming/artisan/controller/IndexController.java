@@ -2,6 +2,7 @@ package com.duoduo.hashming.artisan.controller;
 
 import com.duoduo.hashming.artisan.dto.PaginationDTO;
 import com.duoduo.hashming.artisan.dto.QuestionDTO;
+import com.duoduo.hashming.artisan.dto.Question_User;
 import com.duoduo.hashming.artisan.model.Question;
 import com.duoduo.hashming.artisan.model.User;
 import com.duoduo.hashming.artisan.service.QuestionService;
@@ -49,10 +50,11 @@ public class IndexController {
             }
         }
 
-//        PageInfo<Question> allUser = questionService.findAllQuestion(pageNum, pageSize);
+        PageInfo<Question_User> allUser = questionService.findAllQuestion(pageNum, pageSize);
+        model.addAttribute("pagination",allUser);
 
-        PaginationDTO pagination = questionService.show(pageNum, pageSize);
-        model.addAttribute("pagination",pagination);
+//        PaginationDTO pagination = questionService.show(pageNum, pageSize);
+//        model.addAttribute("pagination",pagination);
         return "index";
     }
 

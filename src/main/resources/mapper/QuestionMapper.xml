@@ -30,6 +30,15 @@
         select count(1) from question
     </select>
 
+    <!--<select id="getall_byCreator" resultType="com.duoduo.hashming.artisan.model.Question">
+        select * from question
+        WHERE 1 = 1
+        <if test="creator!=null">
+            and creator = #{userId}
+        </if>
+        limit #{offset},#{pageSize}
+    </select>-->
+
 
 
 </mapper>

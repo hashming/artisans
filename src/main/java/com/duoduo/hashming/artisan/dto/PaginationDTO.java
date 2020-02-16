@@ -21,22 +21,9 @@ public class PaginationDTO {
      * @param pageNum
      * @param pageSize
      */
-    public void setPagination(Integer totalCount, Integer pageNum, Integer pageSize) {//默认情况下pagenum是1 pagesize是5
-
-        if (totalCount % pageSize == 0) {
-            totalPage = totalCount / pageSize;
-        } else {
-            totalPage = totalCount / pageSize + 1;
-        }
-
-        if (pageNum<1){
-            pageNum=1;
-        }
-        if (pageNum>totalPage){
-            pageNum=totalPage;
-        }
-        this.page = pageNum;
-
+    public void setPagination(Integer totalPage, Integer pageNum) {//默认情况下pagenum是1 pagesize是5
+        this.totalPage=totalPage;
+        this.page=pageNum;
         pages.add(pageNum);//如果是3 1234567
         for (int i = 1; i <=3; i++) {
             if (pageNum-i>0){
@@ -47,6 +34,17 @@ public class PaginationDTO {
                 pages.add(pageNum+i);
             }
         }
+
+
+        if (pageNum<1){
+            pageNum=1;
+        }
+        if (pageNum>totalPage){
+            pageNum=totalPage;
+        }
+        this.page = pageNum;
+
+
 
         //是否展示上一页
         if (pageNum == 1) {
