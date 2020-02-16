@@ -2,7 +2,6 @@ package com.duoduo.hashming.artisan.controller;
 
 import com.duoduo.hashming.artisan.dto.AccessTokenDTO;
 import com.duoduo.hashming.artisan.dto.GithubUser;
-import com.duoduo.hashming.artisan.dao.UserMapper;
 import com.duoduo.hashming.artisan.model.User;
 import com.duoduo.hashming.artisan.provider.GithubProvider;
 import com.duoduo.hashming.artisan.service.UserService;
