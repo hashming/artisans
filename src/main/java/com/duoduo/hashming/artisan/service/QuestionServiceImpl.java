@@ -143,4 +143,10 @@ public class QuestionServiceImpl implements QuestionService{
         return result;
     }
 
+    @Override
+    public Question_User getById(Integer id) {
+        Question_User sdf = questionMapper.getById(id);
+        return sdf;
+    }
+
 }

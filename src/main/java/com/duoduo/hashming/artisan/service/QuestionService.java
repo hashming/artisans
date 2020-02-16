@@ -55,4 +55,10 @@ public interface QuestionService {
      */
     PageInfo<Question_User> findAllQuestionByuserId(Integer userId,Integer pageNum,Integer pageSize);
 
+    /**
+     *
+     * @param id
+     * @return
+     */
+    Question_User getById(Integer id);
 }

@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-//@EnableWebMvc  如果不注解这个css样式会无法显示
+//@EnableWebMvc  如果不注解这个css样式会无法显示   写了这个注解就要自定义静态文件的路径
 public class WebConfig implements WebMvcConfigurer {
 
     //因为这个类被spring的service进行了修饰所以，这个时候webconfig类中引入这个类就要先生命一下

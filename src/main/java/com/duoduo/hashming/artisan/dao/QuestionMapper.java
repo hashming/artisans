@@ -61,4 +61,7 @@ public interface QuestionMapper {
      */
     @Select("select a.*,b.* from question a join user b on a.creator=b.ID where a.creator = #{userId}")
     List<Question_User> showAll_byCreator(@Param("userId") Integer userId);
+
+    @Select("select a.*,b.* from question a join user b on a.creator=b.ID where a.id=#{Id}")
+    Question_User getById(@Param("Id") Integer id);
 }
