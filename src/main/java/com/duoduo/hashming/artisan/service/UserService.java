@@ -15,4 +15,6 @@ public interface UserService {
      * @return
      */
     User find(String token);
+
+    void createOrUpdate(User user);
 }

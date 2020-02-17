@@ -8,10 +8,10 @@ import lombok.Data;
  */
 @Data
 public class GithubUser {
-    private String name;
-    private Long id;
+    private String name;//名字
+    private Long id;//id
     private String bio;
-    private String avatar_url;
+    private String avatar_url;//图片链接
 
     @Override
     public String toString() {
