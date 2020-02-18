@@ -149,4 +149,33 @@ public class QuestionServiceImpl implements QuestionService{
         return sdf;
     }
 
+    @Override
+    public QuestionDTO getId(Integer id){
+        Question question = questionMapper.getId(id);
+        QuestionDTO questionDTO = new QuestionDTO();
+        BeanUtils.copyProperties(question,questionDTO);
+        User user = userMapper.findById(question.getCreator());
+        questionDTO.setUser(user);
+        return questionDTO;
+
+    }
+
+    /**
+     * 进行一个判断如果question.id是空的就创建 不是空就更新
+     * @param question
+     */
+    @Override
+    public void createOrUpdate(Question question) {
+        if (question.getId()==null){
+            //创建
+            question.setGmt_create(System.currentTimeMillis());
+            question.setGmt_modified(question.getGmt_create());
+            questionMapper.create(question);
+        }else{
+            //更新
+            question.setGmt_modified(question.getGmt_create());
+            questionMapper.update(question);
+        }
+    }
+
 }

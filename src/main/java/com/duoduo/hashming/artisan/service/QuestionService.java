@@ -61,4 +61,8 @@ public interface QuestionService {
      * @return
      */
     Question_User getById(Integer id);
+
+    void createOrUpdate(Question question);
+
+    QuestionDTO getId(Integer id);
 }

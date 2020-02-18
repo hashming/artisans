@@ -6,6 +6,7 @@ import com.duoduo.hashming.artisan.model.Question;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -64,4 +65,11 @@ public interface QuestionMapper {
 
     @Select("select a.*,b.* from question a join user b on a.creator=b.ID where a.id=#{Id}")
     Question_User getById(@Param("Id") Integer id);
+
+    @Select("select * from question where id=#{Id}")
+    Question getId(@Param("Id") Integer id);
+
+    @Update("update question set title=#{title},description=#{description},gmt_modified=#{gmt_modified},tag=#{tag} where id=#{id}")
+    void update(Question question);
+
 }
