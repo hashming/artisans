@@ -1,12 +1,9 @@
 package com.duoduo.hashming.artisan.controller;
 
-import com.duoduo.hashming.artisan.dao.QuestionMapper;
 import com.duoduo.hashming.artisan.dto.QuestionDTO;
-import com.duoduo.hashming.artisan.dto.Question_User;
 import com.duoduo.hashming.artisan.model.Question;
 import com.duoduo.hashming.artisan.model.User;
 import com.duoduo.hashming.artisan.service.QuestionService;
-import com.duoduo.hashming.artisan.service.QuestionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

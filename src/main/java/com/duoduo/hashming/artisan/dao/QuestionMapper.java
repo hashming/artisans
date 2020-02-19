@@ -18,6 +18,7 @@ public interface QuestionMapper {
     /**
      * 添加问题信息
      */
+
     int create(Question question);
 
     /**

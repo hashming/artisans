@@ -58,8 +58,8 @@ public class AuthorizeController {
             //把从github上面获取到的用户的信息，存入数据库
             user.setToken(token);
             user.setName(githubUser.getName());
-            user.setAccount_id(String.valueOf(githubUser.getId()));
-            user.setAvatar_url(githubUser.getAvatar_url());//用户头像的图片路径
+            user.setAccountId(String.valueOf(githubUser.getId()));
+            user.setAvatarUrl(githubUser.getAvatar_url());//用户头像的图片路径
             userService.createOrUpdate(user);
 //            userService.addUser(user);
             response.addCookie(new Cookie("token",token));//把token放入到cookie中

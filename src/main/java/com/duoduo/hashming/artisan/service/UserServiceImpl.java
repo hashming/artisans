@@ -2,8 +2,11 @@ package com.duoduo.hashming.artisan.service;
 
 import com.duoduo.hashming.artisan.dao.UserMapper;
 import com.duoduo.hashming.artisan.model.User;
+import com.duoduo.hashming.artisan.model.UserExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service(value = "userService")//定位到对应的接口
 public class UserServiceImpl implements UserService{
@@ -28,25 +31,34 @@ public class UserServiceImpl implements UserService{
      */
     @Override
     public User find(String token) {
-        return userMapper.findByToken(token);
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andTokenEqualTo(token);
+        userMapper.selectByExample(userExample);
+        return null;
     }
 
     @Override
     public void createOrUpdate(User user) {
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andAccountIdEqualTo(user.getAccountId());
+        List<User> users = userMapper.selectByExample(userExample);
         //如果accountid已经存在那么就更新他对应的token,如果不存在就插入token
-        User dbUser = userMapper.findByaccountId(user.getAccount_id());
-        if (dbUser==null){
+        if (users.size()==0){
             //插入
-            user.setGmt_create(System.currentTimeMillis());//用户的创建时间
-            user.setGmt_modified(user.getGmt_create());//用户的更改时间
+            user.setGmtCreate(System.currentTimeMillis());//用户的创建时间
+            user.setGmtModified(user.getGmtCreate());//用户的更改时间
             userMapper.insert(user);
         }else {
             //更新
-            dbUser.setGmt_modified(System.currentTimeMillis());
-            dbUser.setAvatar_url(user.getAvatar_url());
-            dbUser.setName(user.getName());
-            dbUser.setToken(user.getToken());
-            userMapper.update(dbUser);
+            User dbUser = users.get(0);
+            User updateUser = new User();
+            updateUser.setGmtModified(System.currentTimeMillis());
+            updateUser.setAvatarUrl(user.getAvatarUrl());
+            updateUser.setName(user.getName());
+            updateUser.setToken(user.getToken());
+            UserExample example = new UserExample();
+            example.createCriteria().andIdEqualTo(dbUser.getId());
+            userMapper.updateByExampleSelective(updateUser,example);
         }
     }
 }

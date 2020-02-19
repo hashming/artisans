@@ -28,10 +28,10 @@ github:
 
 
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath:mapper_demo/*.xml
   type-aliases-package: com.duoduo.hashming.artisan.model
-#  configuration:
-#    map-underscore-to-camel-case: true
+  configuration:
+    map-underscore-to-camel-case: true
 
 pagehelper:
   helperDialect: mysql

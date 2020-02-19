@@ -59,7 +59,7 @@ public class QuestionServiceImpl implements QuestionService{
 
         for (Question question : questions) {
             //这里的creator和id是相互对应的
-            User user = userMapper.findById(question.getCreator());
+            User user = userMapper.selectByPrimaryKey(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();//比question多一个user属性
 //            questionDTO.setUser(user);
             BeanUtils.copyProperties(question,questionDTO);
@@ -110,7 +110,7 @@ public class QuestionServiceImpl implements QuestionService{
         List<Question> questions = questionMapper.getall_byCreator(userId,offset,pageSize);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         for (Question question : questions) {
-            User user = userMapper.findById(question.getCreator());
+            User user = userMapper.selectByPrimaryKey(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(question,questionDTO);
             questionDTO.setUser(user);
@@ -154,7 +154,7 @@ public class QuestionServiceImpl implements QuestionService{
         Question question = questionMapper.getId(id);
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question,questionDTO);
-        User user = userMapper.findById(question.getCreator());
+        User user = userMapper.selectByPrimaryKey(question.getCreator());
         questionDTO.setUser(user);
         return questionDTO;
 

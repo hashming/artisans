@@ -1,6 +1,8 @@
 package com.duoduo.hashming.artisan.interceptors;
 
+import com.duoduo.hashming.artisan.dao.UserMapper;
 import com.duoduo.hashming.artisan.model.User;
+import com.duoduo.hashming.artisan.model.UserExample;
 import com.duoduo.hashming.artisan.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
@@ -11,12 +13,16 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Service
 public class SessionInterceptor implements HandlerInterceptor {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserMapper userMapper;
 
     /**
      * 程序处理之前。
@@ -29,9 +35,11 @@ public class SessionInterceptor implements HandlerInterceptor {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("token")) {//找到cookie中名字为token的键值对
                     String token = cookie.getValue();//取出对应的cookie
-                    User user = userService.find(token);//通过这个特定的cookie查找指定的user信息
-                    if (user != null) {
-                        request.getSession().setAttribute("user", user);//把查找到的user存入session中。
+                    UserExample userExample = new UserExample();
+                    userExample.createCriteria().andTokenEqualTo(token);
+                    List<User> users = userMapper.selectByExample(userExample);
+                    if (users.size()!= 0) {
+                        request.getSession().setAttribute("user", users.get(0));//把查找到的user存入session中。
                     }
                     break;
                 }
