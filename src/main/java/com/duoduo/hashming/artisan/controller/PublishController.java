@@ -26,10 +26,6 @@ public class PublishController {
 
     @GetMapping("/publish/{id}")
     public String edit(@PathVariable(name = "id") Integer id,Model model){
-       /* Question_User question = questionService.getById(id);
-        model.addAttribute("title",question.getTitle());
-        model.addAttribute("description",question.getDescription());
-        model.addAttribute("tag",question.getTag());*/
         QuestionDTO question = questionService.getId(id);
        model.addAttribute("title",question.getTitle());
        model.addAttribute("description",question.getDescription());
@@ -52,11 +48,10 @@ public class PublishController {
                             @RequestParam(value = "id",required = false) Integer id,//问题的id
             HttpServletRequest request,Model model//request请求
     ){
-        //首先把这些值放在model中就是为了能够在添加失败的时候还能回显到页面中去
-        /*model.addAttribute("title",title);
+        //model插入值只有放在前面才能真正的起到回显的作用。
+        model.addAttribute("title",title);
         model.addAttribute("description",description);
-        model.addAttribute("tag",tag);*/
-
+        model.addAttribute("tag",tag);
         if (title==null || title==""){
             model.addAttribute("error","标题不能是空的");
             return "publish";
@@ -69,10 +64,6 @@ public class PublishController {
             model.addAttribute("error","标签不能是空的");
             return "publish";
         }
-
-        model.addAttribute("title",title);
-        model.addAttribute("description",description);
-        model.addAttribute("tag",tag);
 
         User user = (User)request.getSession().getAttribute("user");//把查找到的user存入session中。
 
@@ -88,8 +79,6 @@ public class PublishController {
         question.setCreator(user.getId());
         question.setId(id);
         questionService.createOrUpdate(question);
-//        questionService.addQuestion(question);//写入数据库
-
         return "redirect:/";
 
     }

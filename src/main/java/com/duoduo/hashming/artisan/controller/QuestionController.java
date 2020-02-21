@@ -1,6 +1,5 @@
 package com.duoduo.hashming.artisan.controller;
 
-import com.duoduo.hashming.artisan.dao.QuestionMapper;
 import com.duoduo.hashming.artisan.dto.Question_User;
 import com.duoduo.hashming.artisan.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+/**
+ * 问题详情展示
+ */
 @Controller
 public class QuestionController {
     @Autowired
@@ -16,7 +18,10 @@ public class QuestionController {
 
     @GetMapping("/question/{id}")
     public String question(@PathVariable(name = "id")Integer id, Model model){
+        //根据问题的id查询对应的问题的详细信息
         Question_User question_user = questionService.getById(id);
+        //累加阅读数
+        questionService.addViewCount(id);
         model.addAttribute("question",question_user);
         return "question";
     }

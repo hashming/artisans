@@ -6,8 +6,6 @@ import com.duoduo.hashming.artisan.dto.Question_User;
 import com.duoduo.hashming.artisan.model.Question;
 import com.github.pagehelper.PageInfo;
 
-import java.util.List;
-
 public interface QuestionService {
 
     /**
@@ -65,4 +63,6 @@ public interface QuestionService {
     void createOrUpdate(Question question);
 
     QuestionDTO getId(Integer id);
+
+    void addViewCount(Integer id);
 }

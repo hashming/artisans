@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>匠心社区</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/community.css">
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+
+</head>
+<body>
+<!--模版引入-->
+<div th:insert="~{navigation :: nav}"></div>
+<div class="jumbotron errortype">
+    <h1>Hello, 兄弟!</h1>
+    <p th:text="${message}">擦一擦眼睛我满足你三个愿望~</p>
+    <p><a class="btn btn-primary btn-lg" href="/" role="button">回到主页</a></p>
+</div>
+
+</body>
+</html>

@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * 咱的问题的控制层
+ */
 @Controller
 public class ProfileController {
 
@@ -41,6 +44,7 @@ public class ProfileController {
             model.addAttribute("sectionName","最新回复");
         }
 //        PaginationDTO paginationDTO = questionService.show(user.getId(), pageNum, pageSize);
+        //根据创建人来查询问题信息
         PageInfo<Question_User> allUser = questionService.findAllQuestionByuserId(user.getId(),pageNum, pageSize);
         model.addAttribute("pagination",allUser);
         return "profile";
