@@ -28,3 +28,23 @@ CREATE TABLE USER
     GMT_MODIFIED BIGINT
 );
 ~~~
+
+
+~~~ sql
+CREATE TABLE comment
+(
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    parent_id BIGINT NOT NULL,
+    type INT NOT NULL,
+    commentator INT NOT NULL,
+    gmt_create BIGINT,
+    gmt_modified BIGINT,
+    like_count BIGINT DEFAULT 0
+);
+COMMENT ON COLUMN comment.parent_id IS '父类id';
+COMMENT ON COLUMN comment.type IS '父类类型';
+COMMENT ON COLUMN comment.commentator IS '评论人id';
+COMMENT ON COLUMN comment.gmt_create IS '创建时间';
+COMMENT ON COLUMN comment.gmt_modified IS '修改时间';
+COMMENT ON COLUMN comment.like_count IS '点赞数';
+~~~
