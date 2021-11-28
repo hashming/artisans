@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
@@ -25,9 +26,13 @@ public class IndexController {
 
         PageInfo<Question_User> allUser = questionService.findAllQuestion(pageNum, pageSize);
         model.addAttribute("pagination",allUser);
-//        PaginationDTO pagination = questionService.show(pageNum, pageSize);
-//        model.addAttribute("pagination",pagination);
         return "index";
+    }
+
+    @RequestMapping("/errorCtl")
+    public String errorCtl(){
+        int a=1/0;
+        return a+"";
     }
 
 }
