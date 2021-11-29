@@ -1,25 +1,25 @@
 package com.duoduo.hashming.artisan.controller;
 
-import com.duoduo.hashming.artisan.entity.Comment;
-import com.duoduo.hashming.artisan.service.CommentService;
+import com.duoduo.hashming.artisan.entity.User;
+import com.duoduo.hashming.artisan.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
 /**
- * (Comment)表控制层
+ * (User)表控制层
  *
  * @author makejava
- * @since 2021-11-29 01:26:36
+ * @since 2021-11-29 01:27:15
  */
 @RestController
-@RequestMapping("comment")
-public class CommentController {
+@RequestMapping("user")
+public class UserController {
     /**
      * 服务对象
      */
     @Resource
-    private CommentService commentService;
+    private UserService userService;
 
     /**
      * 通过主键查询单条数据
@@ -28,8 +28,8 @@ public class CommentController {
      * @return 单条数据
      */
     @GetMapping("selectOne")
-    public Comment selectOne(Long id) {
-        return this.commentService.queryById(id);
+    public User selectOne(Integer id) {
+        return this.userService.queryById(id);
     }
 
 }

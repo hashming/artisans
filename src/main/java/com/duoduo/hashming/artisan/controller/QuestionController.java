@@ -1,35 +1,35 @@
 package com.duoduo.hashming.artisan.controller;
 
-import com.duoduo.hashming.artisan.dto.Question_User;
-import com.duoduo.hashming.artisan.exception.CustomizeException;
+import com.duoduo.hashming.artisan.entity.Question;
 import com.duoduo.hashming.artisan.service.QuestionService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
- * 问题详情展示
+ * (Question)表控制层
+ *
+ * @author makejava
+ * @since 2021-11-29 01:26:59
  */
-@Controller
+@RestController
+@RequestMapping("question")
 public class QuestionController {
-    @Autowired
+    /**
+     * 服务对象
+     */
+    @Resource
     private QuestionService questionService;
 
-    @GetMapping("/question/{id}")
-    public String question(@PathVariable(name = "id")String id, Model model){
-        Integer questionId = null;
-        try{
-            questionId = Integer.parseInt(id);
-        }catch (NumberFormatException e){
-            e.printStackTrace();
-        }
-        //根据问题的id查询对应的问题的详细信息
-        Question_User question_user = questionService.getById(questionId);
-        //累加阅读数
-        questionService.addViewCount(questionId);
-        model.addAttribute("question",question_user);
-        return "question";
+    /**
+     * 通过主键查询单条数据
+     *
+     * @param id 主键
+     * @return 单条数据
+     */
+    @GetMapping("selectOne")
+    public Question selectOne(Integer id) {
+        return this.questionService.queryById(id);
     }
+
 }

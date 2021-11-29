@@ -60,7 +60,7 @@ public class AuthorizeController {
             user.setName(githubUser.getName());
             user.setAccountId(String.valueOf(githubUser.getId()));
             user.setAvatarUrl(githubUser.getAvatar_url());//用户头像的图片路径
-            userService.createOrUpdate(user);
+//            userService.createOrUpdate(user);
 //            userService.addUser(user);
             response.addCookie(new Cookie("token",token));//把token放入到cookie中
             return "redirect:/";//redirect后面要引入一个具体的路径。重定向
