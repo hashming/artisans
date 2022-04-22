@@ -1,8 +1,8 @@
 package com.duoduo.hashming.artisan.controller;
 
 import com.duoduo.hashming.artisan.dto.Question_User;
-import com.duoduo.hashming.artisan.model.User;
-import com.duoduo.hashming.artisan.service.QuestionService;
+import com.duoduo.hashming.artisan.entity.User;
+import com.duoduo.hashming.artisan.service.IQuestionService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ProfileController {
 
     @Autowired
-    private QuestionService questionService;
+    private IQuestionService questionService;
 
 
 //    对应前端的点击事件，当我们点击咱的问题的时候就动态的把questions赋值给action，然后下面的判断就成立了

@@ -1,9 +1,8 @@
 package com.duoduo.hashming.artisan.interceptors;
 
-import com.duoduo.hashming.artisan.dao.UserMapper;
-import com.duoduo.hashming.artisan.model.User;
-import com.duoduo.hashming.artisan.model.UserExample;
-import com.duoduo.hashming.artisan.service.UserService;
+import com.duoduo.hashming.artisan.entity.User;
+import com.duoduo.hashming.artisan.mapper.UserMapper;
+import com.duoduo.hashming.artisan.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,7 @@ import java.util.List;
 public class SessionInterceptor implements HandlerInterceptor {
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     @Autowired
     private UserMapper userMapper;

@@ -1,9 +1,9 @@
 package com.duoduo.hashming.artisan.controller;
 
 import com.duoduo.hashming.artisan.dto.QuestionDTO;
-import com.duoduo.hashming.artisan.model.Question;
-import com.duoduo.hashming.artisan.model.User;
-import com.duoduo.hashming.artisan.service.QuestionService;
+import com.duoduo.hashming.artisan.entity.Question;
+import com.duoduo.hashming.artisan.entity.User;
+import com.duoduo.hashming.artisan.service.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class PublishController {
 
-    /*@Autowired
-    private QuestionMapper questionMapper;*/
-
     @Autowired
-    private QuestionService questionService;
+    private IQuestionService questionService;
 
     @GetMapping("/publish/{id}")
     public String edit(@PathVariable(name = "id") Integer id,Model model){

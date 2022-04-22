@@ -1,13 +1,9 @@
 package com.duoduo.hashming.artisan.controller;
 
-import com.duoduo.hashming.artisan.dao.CommentMapper;
 import com.duoduo.hashming.artisan.dto.CommentDTO;
 import com.duoduo.hashming.artisan.dto.ResultDTO;
-import com.duoduo.hashming.artisan.model.Comment;
-import com.duoduo.hashming.artisan.model.User;
-import com.duoduo.hashming.artisan.service.CommentService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import com.duoduo.hashming.artisan.entity.Comment;
+import com.duoduo.hashming.artisan.entity.User;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

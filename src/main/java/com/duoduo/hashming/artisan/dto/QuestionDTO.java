@@ -1,6 +1,6 @@
 package com.duoduo.hashming.artisan.dto;
 
-import com.duoduo.hashming.artisan.model.User;
+import com.duoduo.hashming.artisan.entity.User;
 import lombok.Data;
 
 /**

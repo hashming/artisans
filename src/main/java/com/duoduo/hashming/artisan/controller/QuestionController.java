@@ -1,8 +1,7 @@
 package com.duoduo.hashming.artisan.controller;
 
 import com.duoduo.hashming.artisan.dto.Question_User;
-import com.duoduo.hashming.artisan.exception.CustomizeException;
-import com.duoduo.hashming.artisan.service.QuestionService;
+import com.duoduo.hashming.artisan.service.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class QuestionController {
     @Autowired
-    private QuestionService questionService;
+    private IQuestionService questionService;
 
     @GetMapping("/question/{id}")
     public String question(@PathVariable(name = "id")String id, Model model){

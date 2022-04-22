@@ -2,9 +2,9 @@ package com.duoduo.hashming.artisan.controller;
 
 import com.duoduo.hashming.artisan.dto.AccessTokenDTO;
 import com.duoduo.hashming.artisan.dto.GithubUser;
-import com.duoduo.hashming.artisan.model.User;
+import com.duoduo.hashming.artisan.entity.User;
 import com.duoduo.hashming.artisan.provider.GithubProvider;
-import com.duoduo.hashming.artisan.service.UserService;
+import com.duoduo.hashming.artisan.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -32,7 +32,7 @@ public class AuthorizeController {
     private String uri;
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
 
     @GetMapping("/callback")

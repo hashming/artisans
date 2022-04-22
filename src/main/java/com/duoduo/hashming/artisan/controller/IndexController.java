@@ -1,7 +1,7 @@
 package com.duoduo.hashming.artisan.controller;
 
 import com.duoduo.hashming.artisan.dto.Question_User;
-import com.duoduo.hashming.artisan.service.QuestionService;
+import com.duoduo.hashming.artisan.service.IQuestionService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class IndexController {
 
     @Autowired
-    private QuestionService questionService;
+    private IQuestionService questionService;
 
     @GetMapping("/")
     public String index(Model model,
