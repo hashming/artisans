@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>发布—我们几个的社区</title>
+    <title>发布—匠心社区</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -43,7 +43,7 @@
                     <input type="text" class="form-control" th:value="${tag}" name="tag" id="tag" placeholder="输入标签用，号隔开...">
                 </div>
 
-                <div class="container-fluid main">
+                <div class="container-fluid tag-publish">
                     <div class="row">
                         <!--error这个绑定着后端的error标签-->
                         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
@@ -53,16 +53,16 @@
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                            <!--因为这里type的类型是submit，点击之后就会连接后端的post请求上-->
-                            <button type="submit" class="btn btn-success btn-publish">
-                                发布
-                            </button>
+                            <div class="manual-style">
+                                <!--因为这里type的类型是submit，点击之后就会连接后端的post请求上-->
+                                <button type="submit" class="btn btn-success btn-publish">
+                                    发布
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!--<span class="alert alert-danger" th:text="${error}"></span>
-                <button type="submit" class="btn btn-success btn-publish">发布</button>-->
 
             </form>
 

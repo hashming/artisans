@@ -14,4 +14,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface IUserService extends IService<User> {
 
     void createOrUpdate(User user);
+
+    User findUser(String userName, String password);
+
+    Boolean addCookieForCurrentUser(User user);
 }

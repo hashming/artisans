@@ -35,3 +35,13 @@ body{
 .errortype{
     margin: 50px;
 }
+
+.tag-publish{
+    background-color: white;
+}
+
+/*抵消bootstrap的栅栏样式*/
+.manual-style{
+    margin-left: -15px;
+    margin-right: -15px;
+}

@@ -40,13 +40,6 @@
 
             <nav aria-label="Page navigation">
                 <ul class="pagination">
-                    <!--显示跳转到第一页按钮-->
-                    <!--<li th:if="${pagination.showFirstPage}">
-                        <a href="/?pageNum=1" aria-label="Previous">
-                            &lt;!&ndash;括号里面的是《这个符号&ndash;&gt;
-                            <span aria-hidden="true">&lt;&lt;</span>
-                        </a>
-                    </li>-->
                     <li>
                         <a href="/?pageNum=1" aria-label="Previous">
                             <!--括号里面的是《这个符号-->
@@ -75,12 +68,6 @@
                             <span aria-hidden="true">&gt;</span>
                         </a>
                     </li>
-                    <!--显示最后一页按钮-->
-                    <!--<li th:if="${pagination.showEndPage}">
-                        <a th:href="@{/(pageNum=${pagination.totalPage})}" aria-label="Previous">
-                            <span aria-hidden="true">&gt;&gt;</span>
-                        </a>
-                    </li>-->
                     <li>
                         <a th:href="@{/(pageNum=${pagination.pages})}" aria-label="Previous">
                             <span aria-hidden="true">&gt;&gt;</span>

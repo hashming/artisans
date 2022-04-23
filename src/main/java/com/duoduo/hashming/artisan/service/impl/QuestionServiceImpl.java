@@ -18,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Wrapper;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +49,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
      */
     @Override
     public PageInfo<Question_User> findAllQuestion(Integer pageNum, Integer pageSize) {
-        PageInfo<Question_User> pageInfo = PageHelper.startPage(1, 5).doSelectPageInfo(
+        PageInfo<Question_User> pageInfo = PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(
                 () -> questionMapper.selectQuestionUser()
         );
         return pageInfo;
@@ -56,12 +58,15 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
 
     @Override
     public void createOrUpdate(Question question) {
+        Long time = System.currentTimeMillis();
         QueryWrapper<Question> questionQueryWrapper = new QueryWrapper<>();
         questionQueryWrapper.eq("id", question.getId());
         boolean isExitQuestion = questionMapper.exists(questionQueryWrapper);
         if (isExitQuestion) {
+            question.setGmtModified(time);
             questionMapper.update(question, questionQueryWrapper);
         } else {
+            question.setGmtCreate(time);
             questionMapper.insert(question);
         }
     }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!--定义模版-->
+<!--定义模版 就是公共部分-->
 <html xmlns:th="http://www.thymeleaf.org">
 
 <body>
@@ -55,7 +55,7 @@
 
                     <!--如果session中没有值的情况下，右上角是登录字样-->
                     <li th:if="${session.user == null}">
-                        <a href="https://github.com/login/oauth/authorize?client_id=c69ece8b7824522367e0&redirect_uri=http://localhost:8080/callback&scope=user&state=1">登录</a>
+                        <a href="/login">登录</a>
                         <!--第一步的时候添加的连接，官方文档上显示client_id是必要的，这里我们又添加了一个重定向uri-->
                     </li>
 
