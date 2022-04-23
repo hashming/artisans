@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.duoduo.hashming.artisan.dao")
+@MapperScan("com.duoduo.hashming.artisan.mapper")
 public class ArtisanApplication {
 
 	public static void main(String[] args) {
