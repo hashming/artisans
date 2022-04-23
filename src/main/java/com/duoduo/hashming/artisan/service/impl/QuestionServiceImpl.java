@@ -1,15 +1,19 @@
 package com.duoduo.hashming.artisan.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.duoduo.hashming.artisan.dto.QuestionDTO;
 import com.duoduo.hashming.artisan.dto.Question_User;
 import com.duoduo.hashming.artisan.entity.Question;
+import com.duoduo.hashming.artisan.entity.User;
 import com.duoduo.hashming.artisan.mapper.QuestionMapper;
+import com.duoduo.hashming.artisan.mapper.UserMapper;
 import com.duoduo.hashming.artisan.service.IQuestionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.javassist.tools.reflect.Sample;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +35,8 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
 
     @Autowired
     private QuestionMapper questionMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     /**
      * 首页展示问题列表
@@ -58,5 +64,21 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
         } else {
             questionMapper.insert(question);
         }
+    }
+
+    /**
+     * 根据Id查询问题相关信息
+     *
+     * @param id 问题id
+     * @return 问题相关信息
+     */
+    @Override
+    public QuestionDTO getQuestionById(Integer id) {
+        Question question = questionMapper.selectById(id);
+        QuestionDTO questionDTO = new QuestionDTO();
+        BeanUtils.copyProperties(question, questionDTO);
+        User user = userMapper.selectById(question.getCreator());
+        questionDTO.setUser(user);
+        return questionDTO;
     }
 }
