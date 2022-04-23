@@ -1,5 +1,6 @@
 package com.duoduo.hashming.artisan.interceptors;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.duoduo.hashming.artisan.entity.User;
 import com.duoduo.hashming.artisan.mapper.UserMapper;
 import com.duoduo.hashming.artisan.service.IUserService;
@@ -34,9 +35,9 @@ public class SessionInterceptor implements HandlerInterceptor {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("token")) {//找到cookie中名字为token的键值对
                     String token = cookie.getValue();//取出对应的cookie
-                    UserExample userExample = new UserExample();
-                    userExample.createCriteria().andTokenEqualTo(token);
-                    List<User> users = userMapper.selectByExample(userExample);
+                    QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+                    userQueryWrapper.eq("token", token);
+                    List<User> users = userMapper.selectList(userQueryWrapper);
                     if (users.size()!= 0) {
                         request.getSession().setAttribute("user", users.get(0));//把查找到的user存入session中。
                     }
