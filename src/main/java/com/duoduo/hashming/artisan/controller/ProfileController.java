@@ -45,7 +45,7 @@ public class ProfileController {
         }
 //        PaginationDTO paginationDTO = questionService.show(user.getId(), pageNum, pageSize);
         //根据创建人来查询问题信息
-        PageInfo<Question_User> allUser = questionService.findAllQuestionByuserId(user.getId(),pageNum, pageSize);
+        PageInfo<Question_User> allUser = questionService.findAllQuestionByUserId(user.getId(),pageNum, pageSize);
         model.addAttribute("pagination",allUser);
         return "profile";
     }

@@ -22,5 +22,5 @@ public interface IQuestionService extends IService<Question> {
 
     QuestionDTO getQuestionById(Integer id);
 
-    PageInfo<Question_User> findAllQuestionByuserId(Integer id, Integer pageNum, Integer pageSize);
+    PageInfo<Question_User> findAllQuestionByUserId(Integer id, Integer pageNum, Integer pageSize);
 }

@@ -81,4 +81,14 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
         questionDTO.setUser(user);
         return questionDTO;
     }
+
+    @Override
+    public PageInfo<Question_User> findAllQuestionByUserId(Integer id, Integer pageNum, Integer pageSize) {
+
+        PageInfo<Question_User> pageInfo = PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(
+                () -> questionMapper.selectQuestionUser()
+        );
+
+        return pageInfo;
+    }
 }
