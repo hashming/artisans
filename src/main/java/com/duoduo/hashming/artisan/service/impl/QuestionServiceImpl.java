@@ -14,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Wrapper;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -49,7 +51,12 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
     @Override
     public void createOrUpdate(Question question) {
         QueryWrapper<Question> questionQueryWrapper = new QueryWrapper<>();
-
-        questionMapper.update(question, questionQueryWrapper);
+        questionQueryWrapper.eq("id", question.getId());
+        boolean isExitQuestion = questionMapper.exists(questionQueryWrapper);
+        if (isExitQuestion) {
+            questionMapper.update(question, questionQueryWrapper);
+        } else {
+            questionMapper.insert(question);
+        }
     }
 }
