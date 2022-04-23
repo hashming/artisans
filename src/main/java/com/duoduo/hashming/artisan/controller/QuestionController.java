@@ -1,6 +1,7 @@
 package com.duoduo.hashming.artisan.controller;
 
 import com.duoduo.hashming.artisan.dto.Question_User;
+import com.duoduo.hashming.artisan.entity.Question;
 import com.duoduo.hashming.artisan.service.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,7 @@ public class QuestionController {
             e.printStackTrace();
         }
         //根据问题的id查询对应的问题的详细信息
-        Question_User question_user = questionService.getById(questionId);
+        Question_User question_user = questionService.getQuestionDetailById(questionId);
         //累加阅读数
         questionService.addViewCount(questionId);
         model.addAttribute("question",question_user);

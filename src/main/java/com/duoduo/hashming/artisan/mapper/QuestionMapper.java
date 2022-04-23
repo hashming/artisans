@@ -27,5 +27,11 @@ public interface QuestionMapper extends BaseMapper<Question> {
      * @return
      */
     @Select("select a.*,b.* from question a join user b on a.creator=b.ID where a.creator = #{userId}")
-    List<Question_User> showAllByCreator(Integer userId);
+    List<Question_User> showAllByCreator(@Param("userId") Integer userId);
+
+    @Select("select a.*,b.* from question a join user b on a.creator=b.ID where a.id=#{questionId}")
+    Question_User getQuestionDetailById(@Param("questionId") Integer questionId);
+
+
+    void addViewCount(Integer questionId);
 }

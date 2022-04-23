@@ -89,4 +89,15 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
         );
         return pageInfo;
     }
+
+    @Override
+    public Question_User getQuestionDetailById(Integer questionId) {
+        Question_User sdf = questionMapper.getQuestionDetailById(questionId);
+        return sdf;
+    }
+
+    @Override
+    public void addViewCount(Integer questionId) {
+        questionMapper.addViewCount(questionId);
+    }
 }
