@@ -83,12 +83,10 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
     }
 
     @Override
-    public PageInfo<Question_User> findAllQuestionByUserId(Integer id, Integer pageNum, Integer pageSize) {
-
+    public PageInfo<Question_User> findAllQuestionByUserId(Integer userId, Integer pageNum, Integer pageSize) {
         PageInfo<Question_User> pageInfo = PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(
-                () -> questionMapper.selectQuestionUser()
+                () -> questionMapper.showAllByCreator(userId)
         );
-
         return pageInfo;
     }
 }
