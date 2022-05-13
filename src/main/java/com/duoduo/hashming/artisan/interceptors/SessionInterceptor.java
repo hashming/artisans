@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.duoduo.hashming.artisan.entity.User;
 import com.duoduo.hashming.artisan.mapper.UserMapper;
 import com.duoduo.hashming.artisan.service.IUserService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,9 @@ public class SessionInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        logger.info("preHandle --- {} ---------", request.getRequestURI()+"/"+request.getQueryString());
+        if (StringUtils.isNotEmpty(request.getQueryString())) {
+            logger.info("preHandle --- {} ---------", request.getRequestURI()+"/"+request.getQueryString());
+        }
         Cookie[] cookies = request.getCookies();//请求中又好多cookie
         //下面的这个代码以后可以用redis的方式进行代替
         if (cookies != null && cookies.length != 0) {

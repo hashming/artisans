@@ -52,7 +52,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
     public PageInfo<Question_User> findAllQuestion(Integer pageNum, Integer pageSize, String questionName) {
         PageInfo<Question_User> pageInfo = PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(
                 () -> {
-                    List<Question_User> question_users = questionMapper.selectQuestionUser(questionName);
+                    questionMapper.selectQuestionUser(questionName);
                 }
         );
         return pageInfo;

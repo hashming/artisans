@@ -46,9 +46,9 @@ server:
 
 #mybatis??
 mybatis-plus:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-#  config-location: classpath:mybatis/mybatis-config.xml
-#  mapper-locations: classpath*:mybatis/mapper/**/*.xml
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  configlocation: classpath:mybatis/mybatis-config.xml
+  mapperlocations: classpath*:mybatis/mapper/**/*.xml
 
 
