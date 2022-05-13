@@ -16,7 +16,7 @@ import com.github.pagehelper.PageInfo;
  */
 public interface IQuestionService extends IService<Question> {
 
-    PageInfo<Question_User> findAllQuestion(Integer pageNum, Integer pageSize);
+    PageInfo<Question_User> findAllQuestion(Integer pageNum, Integer pageSize, String questionName);
 
     void createOrUpdate(Question question);
 
@@ -27,4 +27,5 @@ public interface IQuestionService extends IService<Question> {
     Question_User getQuestionDetailById(Integer questionId);
 
     void addViewCount(Integer questionId);
+
 }

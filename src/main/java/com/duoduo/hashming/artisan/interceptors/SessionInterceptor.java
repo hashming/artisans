@@ -33,7 +33,7 @@ public class SessionInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        logger.info("preHandle {}...", request.getRequestURI());
+        logger.info("preHandle --- {} ---------", request.getRequestURI()+"/"+request.getQueryString());
         Cookie[] cookies = request.getCookies();//请求中又好多cookie
         //下面的这个代码以后可以用redis的方式进行代替
         if (cookies != null && cookies.length != 0) {

@@ -2,6 +2,7 @@ package com.duoduo.hashming.artisan.mapper;
 
 import com.duoduo.hashming.artisan.entity.LoginUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author duoduo
  * @since 2022-04-22
  */
+@Mapper
 public interface LoginUserMapper extends BaseMapper<LoginUser> {
 
 }

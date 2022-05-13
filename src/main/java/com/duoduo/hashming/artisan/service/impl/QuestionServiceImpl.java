@@ -43,14 +43,17 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
     /**
      * 首页展示问题列表
      *
-     * @param pageNum  pageNum
-     * @param pageSize  pageSize
-     * @return PageInfo
+     * @param pageNum
+     * @param pageSize
+     * @param questionName
+     * @return
      */
     @Override
-    public PageInfo<Question_User> findAllQuestion(Integer pageNum, Integer pageSize) {
+    public PageInfo<Question_User> findAllQuestion(Integer pageNum, Integer pageSize, String questionName) {
         PageInfo<Question_User> pageInfo = PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(
-                () -> questionMapper.selectQuestionUser()
+                () -> {
+                    List<Question_User> question_users = questionMapper.selectQuestionUser(questionName);
+                }
         );
         return pageInfo;
     }

@@ -3,6 +3,8 @@ package com.duoduo.hashming.artisan.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -14,6 +16,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @author duoduo
  * @since 2022-04-22
  */
+@TableName("comment")
 @ApiModel(value = "Comment对象", description = "")
 public class Comment implements Serializable {
 

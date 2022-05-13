@@ -27,11 +27,11 @@ github:
      secret: 58f2c0643fd18fe045b876a0c4e245ac347f2b59
 
 
-mybatis:
-  mapper-locations: classpath:mapper_demo/*.xml
-  type-aliases-package: com.duoduo.hashming.artisan.model
-  configuration:
-    map-underscore-to-camel-case: true
+#mybatis:
+#  mapper-locations: classpath:mapper_demo/*.xml
+#  type-aliases-package: com.duoduo.hashming.artisan.model
+#  configuration:
+#    map-underscore-to-camel-case: true
 
 pagehelper:
   helperDialect: mysql
@@ -48,4 +48,7 @@ server:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  config-location: classpath:mybatis/mybatis-config.xml
+#  mapper-locations: classpath*:mybatis/mapper/**/*.xml
+
 
